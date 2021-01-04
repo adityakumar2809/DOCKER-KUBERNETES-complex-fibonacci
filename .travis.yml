@@ -1,0 +1,16 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker build -t "$DOCKER_USERNAME"/complex-fibonacci -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true "$DOCKER_USERNAME"/complex-fibonacci npm test
+
+after_success:
+  - docker build -t "$DOCKER_USERNAME"/complex-fibonacci-client ./client
+  - docker build -t "$DOCKER_USERNAME"/complex-fibonacci-nginx ./nginx
+  - docker build -t "$DOCKER_USERNAME"/complex-fibonacci-server ./server
+  - docker build -t "$DOCKER_USERNAME"/complex-fibonacci-worker ./worker
