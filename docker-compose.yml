@@ -7,3 +7,10 @@ services:
       POSTGRES_HOST_AUTH_METHOD: "trust"
   redis:
     image: 'redis:latest'
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - ./server:/app
