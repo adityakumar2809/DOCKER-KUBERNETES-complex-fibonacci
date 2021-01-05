@@ -21,3 +21,15 @@ after_success:
   - docker push "$DOCKER_USERNAME"/complex-fibonacci-nginx
   - docker push "$DOCKER_USERNAME"/complex-fibonacci-server
   - docker push "$DOCKER_USERNAME"/complex-fibonacci-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: us-east-2
+  app:  complex-fibonacci
+  env:  ComplexFibonacci-env
+  bucket_name:  elasticbeanstalk-us-east-2-636982052424
+  bucket_path:  complex-fibonacci
+  on:
+    branch: master
+  access_key_id: "$AWS_ACCESS_KEY"
+  secret_access_key: "$AWS_SECRET_KEY"
