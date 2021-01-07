@@ -7,13 +7,13 @@ spec:
   selector:
     matchLabels:
       component:  web
-    template:
-      metadata:
-        labels:
-          component:  web
-      spec:
-        containers:
-          - name: client
-            image:  adityakumar2809/complex-fibonacci-client
-            ports:
-              - containerPort:  3000
+  template:
+    metadata:
+      labels:
+        component:  web
+    spec:
+      containers:
+        - name: client
+          image:  adityakumar2809/complex-fibonacci-client
+          ports:
+            - containerPort:  3000
