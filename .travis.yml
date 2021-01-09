@@ -16,3 +16,9 @@ before_install:
 
 scripts:
   - docker run "$DOCKER_USERNAME"/complex-fibonacci-test npm test
+
+deploy:
+  provider: script
+  script: bash ./deploy.sh
+  on:
+    branch: master
